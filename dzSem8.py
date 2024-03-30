@@ -40,7 +40,12 @@ def transfer_data(source: str, dest: str, num_row: int):
     dest: str - имя файла куда переносим
     num_row: int - номер переносимой строки
     """
-    pass
+    a_or_w = input("Ведите 1, если хотите перезаписать файл или он новый.\nВведите 2, если хотите дополнить уже существующий файл: ")
+    with open(source, "r") as s, open(dest, 'w' if a_or_w == 1 else 'a') as d:
+        for index, line in enumerate(s, 1):
+            if index == num_row:
+                d.write(line)
+                
 
 
 INFO_STRING = """
@@ -71,4 +76,6 @@ while True:
         print(search_user(file, data))
     elif mode == 4:
         # Тут нужно вызвать функцию с аргументами
-        pass
+        file2 = str(input("Введите название файла: "))
+        number_str = int(input("Ведите номер строки для переноса: "))
+        transfer_data(file, file2, number_str)
